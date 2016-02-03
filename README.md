@@ -23,7 +23,7 @@ https://kangax.github.io/compat-table/es6/
 
 Short Documentation
 ===================
-http://es6-features.org/#ParameterContextMatching
+http://es6-features.org/
 
 Some Practice (requires Subscription)
 =====================================
