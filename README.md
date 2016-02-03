@@ -239,30 +239,14 @@ for(var key in a){
 }
 
 
-
-Real World Map
-==============
-
-`
-"use strict";
-
-var a = {
-    b: "corn",
-    c: {
-        d: "cOrn",
-        e: {
-            f: "frank",
-            g: "coRN"
-        }, 
-        h: "CORN"
-    },
-}
-
-use Map() to keep track of where you have visited.
-
-
 Iterable Object
 ===============
 An abstraction for a collection that knows how to go through its members in order.
 
 Objects are not iterable!  Make no guarantee of order that you can go through.
+
+Links
+=====
+[ks] [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
+[bab][https://babeljs.io/]
+[wp][https://webpack.github.io/]
