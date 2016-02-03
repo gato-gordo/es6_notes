@@ -73,7 +73,7 @@ Arrow Functions
 
 As anonymous functions, arrow functions are most often useful in cases where you are declaring short callback functions.  Take a function that adds together all the values passed into it as arguments.  The ES5 way of doing this would be:
 
-`
+```javascript
 function add(){
     var nums = Array.prototype.slice.call(arguments);
     return nums.reduce( function(accum, val) {
@@ -82,38 +82,38 @@ function add(){
 }
 
 add(1, 2, 3, 4, 5) // output >> 15
-`
+```
 
 Using arrow functions, we no longer need to use the `function` keyword in our callback.  We simply declare our function with the following syntax: `(params) => { //function body }`:
 
-`
+```javascript
 function add(){
     var nums = Array.prototype.slice.call(arguments);
     return nums.reduce( (accum, val) => {
         return accum + val ;
     });
 }
-`
+```
 
 Furthermore, when our function body is only one-line long, we can omit the braces and the explicit return statement:
 
-`
+```javascript
 function add(){
     var nums = Array.prototype.slice.call(arguments);
     return nums.reduce( (accum, val) => accum + val );
 }
-`
+```
 
 The final bit of syntactic sugar arrow functions provide is the ability to omit parentheses when our function only takes one argument:
 
-`
+```javascript
 function multiplyBy2(){
     var nums = Array.prototype.slice.call(arguments);
     return nums.map( num => num * 2);
 }
 
 multiplyBy2(1, 2, 3, 4, 5) // output >> [2, 4, 6, 8, 10]
-`
+```
 
 **No dynamic this binding**
 
@@ -121,7 +121,7 @@ The syntactic sugar arrow functions make available can provide a nice way for wr
 
 In plain old JavaScript functions, `this` gets bound at call time. If we run the following code, our step function will log "undefined" to the console every interval.
 
-`
+```javascript
     var NameLogger = function(name, time){
         this.time = time;
         this.name = name;
@@ -139,12 +139,13 @@ In plain old JavaScript functions, `this` gets bound at call time. If we run the
     undefined
     undefined...
     */
-`
+```
+
 The reason that it logs "undefined" is that our callback function (a plain old JS function) is a "free function": it is not the method of an object.  When that callback function is run, `this` is bound to the global object, rather than the object that we created with the `NameLogger` constructor, which is likely what was intended by the use of `this`.
 
 If an arrow function were substituted for our plain old JS callback function, we would get the result we want:
 
-`
+```javascript
     var NameLogger = function(name, time){
         this.time = time;
         this.name = name;
@@ -162,7 +163,7 @@ If an arrow function were substituted for our plain old JS callback function, we
     "Ignacio"
     "Ignacio"...
     */
-`
+```
 
 The reason for the difference in behavior between our arrow function and the plain old JS callback function is that arrow functions create no binding to `this` at call time.  If `this` appears in an arrow function body, it will be lexically bound.  So, when the constructor function is run, it will create a `this` binding to the object being constructed.  The arrow function creates no separate `this` binding, so occurrences of `this` inside of it will be bound to the same object.
 
@@ -170,7 +171,7 @@ Other Syntactic Sugar
 =====================
 Rest parameters
         
-/*
+```javascript
 function projectNums(projector){
     var nums = Array.prototype.slice.call(arguments, 1);
     return nums.map(projector);
@@ -178,28 +179,29 @@ function projectNums(projector){
 function by2(num){
     return num * 2;
 }
-*/
+```
 
 Destructuring
 =============
-//var nums = [1, 2, 3, 4, 5];
-//var a = nums[0]
-//var b = nums[1];
-//var args = nums.slice(2);
+```javascript
+var nums = [1, 2, 3, 4, 5];
+var a = nums[0]
+var b = nums[1];
+var args = nums.slice(2);
 
-//var [a, b, ...args] = nums;
-//var [a, , b]
-//console.log(a, b, args);
+var [a, b, ...args] = nums;
+var [a, , b];
+console.log(a, b, args);
 
-//var me = {
-//    name: "Ignacio",
-//    profession: "Fellow"
-//}
+var me = {
+    name: "Ignacio",
+    profession: "Fellow"
+}
 
 var name = me.name, profession = me.profession;
 
-/var {name, profession} = me;
-//console.log(name, profession);
+var {name, profession} = me;
+console.log(name, profession);
 
 var name = "Ignacio", profession "Fellow";
 var me = {
@@ -207,10 +209,12 @@ var me = {
     profession: profession;
 };
 
-//var me = { name, profession };
+var me = { name, profession };
+```
 
 Default Parameters
 ==================
+```javascript
 function howDeep(){
     depth = depth || 0;
     console.log(depth);
@@ -219,83 +223,90 @@ function howDeep(){
 howDeep(2);
 howDeep();
 
-// function howDeep(depth = 0){
-//     console.log(depth);  
-// }
+function howDeep(depth = 0){
+  console.log(depth);  
+}
+```javascript
 
 Bindings
 ========
 let
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
 
-// var nums = [0, 1, 2, 3, 4, 5];
-// for(var i = 0; i < nums.length; i++){
-//     var name = "Just using this in my for loop";
-//     console.log(nums[i])
-// }
-// console.log(i)
-// console.log(name);
+```javascript
+var nums = [0, 1, 2, 3, 4, 5];
+for(var i = 0; i < nums.length; i++){
+    var name = "Just using this in my for loop";
+     console.log(nums[i])
+}
+console.log(i)
+console.log(name);
+```
 
 const
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
-//const MAX_NUM = 25;
-//MAX_NUM = 23;
-//console.log(MAX_NUM);
+```javascript
+const MAX_NUM = 25;
+MAX_NUM = 23;
+console.log(MAX_NUM);
 
-//var num = 25;
-//const MAX = num;
-//num = 23;
-//console.log(MAX);
+var num = 25;
+const MAX = num;
+num = 23;
+console.log(MAX);
 
-// scopeFun();
-// function scopeFun(){
-//     var MAX = 20;
-//     for(let i = 0; i < 5; i++){
-//         let MAX = i;
-//     }
-//     return MAX;
-// }
+scopeFun();
+function scopeFun(){
+     var MAX = 20;
+     for(let i = 0; i < 5; i++){
+         let MAX = i;
+     }
+     return MAX;
+}
 
 
-// const ME = {
-//     name: "Ignacio",
-//     profession: "Fellow"
-// }
+ const ME = {
+     name: "Ignacio",
+     profession: "Fellow"
+ }
 
-//ME = "Software Engineer";
-//ME.profession = "Software Engineer";
-//console.log(ME)
+ME = "Software Engineer";
+ME.profession = "Software Engineer";
+console.log(ME)
+```
+really about signalling intent
 
-//really about signalling intent
-
-...
 
 Set
 ===
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
 
-// var fib = new Set(arry);
-// fib.add(0);
-// fib.add(1);
-// fib.add(1);
-// fib.add(2);
-// fib.add(3);
-// console.log(fib.has(3));
-// console.log(fib.has(20));
-// console.log(fib.delete(3));
-// console.log(fib.delete(20));
-// console.log(fib.has(3));
-// console.log(fib.has(20));
+```javascript
+var fib = new Set(arry);
+fib.add(0);
+fib.add(1);
+fib.add(1);
+fib.add(2);
+fib.add(3);
+console.log(fib.has(3));
+console.log(fib.has(20));
+console.log(fib.delete(3));
+console.log(fib.delete(20));
+console.log(fib.has(3));
+console.log(fib.has(20));
 
-// for(var num of fib){
-//     console.log(num);
-// }
-// var arry = [0, 1, 1, 2, 3, 5, 8, 13];
+for(var num of fib){
+    console.log(num);
+}
+var arry = [0, 1, 1, 2, 3, 5, 8, 13];
+```
+
 Map
 ===
 Key/value store: key can be any value, instead of just a string
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 
+```javascript
 var a = {}
 var b = {
     age: 21,
@@ -315,13 +326,13 @@ console.log(a[b], a[c])
 for(var key in a){
     console.log(key);
 }
-
+```
 
 Iterable Object
 ===============
 An abstraction for a collection that knows how to go through its members in order.
 
-Objects are not iterable!  Make no guarantee of order that you can go through.
+Plain old JS objects are not iterable!  They make no guarantee of how their keys will be ordered when you loop through them (might be insertion order, might be unicode order, might be something else).
 
 [ks]: [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
 [bab]:[https://babeljs.io/]
