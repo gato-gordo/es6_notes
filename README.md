@@ -69,9 +69,10 @@ Arrow Functions
 
 >An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and lexically binds the this value (does not bind its own this, arguments, super, or new.target). Arrow functions are always anonymous.
 
-As anonymous functions, they are most often useful in cases where you have a short functions.  Take a function that adds together all the values passed into it as arguments.  The ES5 way of doing this would be:
-
 **Arrow functions syntactic sugar**
+
+As anonymous functions, arrow functions are most often useful in cases where you are declaring short callback functions.  Take a function that adds together all the values passed into it as arguments.  The ES5 way of doing this would be:
+
 `
 function add(){
     var nums = Array.prototype.slice.call(arguments);
@@ -326,5 +327,3 @@ Objects are not iterable!  Make no guarantee of order that you can go through.
 [bab]:[https://babeljs.io/]
 [wp]: [https://webpack.github.io/]
 [af]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions]
-
-[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters]
