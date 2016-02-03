@@ -50,15 +50,14 @@ The main tool for transpiling ES2015 is [Babel][bab].  For actual production pro
 
 Babel can be installed as an NPM Module.  Unlike many command-line tools that you will want to install globally, you may want to have different versions of Babel running for different projects, so install it locally.
 
-1. Create directory and cd in
-2. Run some commands: 
-    `npm init`
-    `npm install --save-dev babel-cli`
-    `npm install --save-dev babel-preset-es2015`
-    `echo '{ "presets": ["es2015"] }' > .babelrc`
-    `./node_modules/.bin/babel --out-file destinationFile.js sourceFile.js`
+1. Create a directory, cd in, then run:
+2. `npm init`
+3. `npm install --save-dev babel-cli`
+4. `npm install --save-dev babel-preset-es2015`
+5. `echo '{ "presets": ["es2015"] }' > .babelrc`
+6. `./node_modules/.bin/babel --out-file destinationFile.js sourceFile.js`
     
-Run the last command everytime you want to transpile. You could also alias the command to an npm script--e.g., "npm build";
+Run the last command everytime you want to transpile. You could also alias the command to an npm script--e.g., "npm build".
 
 Arrow Functions
 ===============
