@@ -59,49 +59,116 @@ Babel can be installed as an NPM Module.  Unlike many command-line tools that yo
     
 Run the last command everytime you want to transpile. You could also alias the command to an npm script--e.g., "npm build".
 
-Arrow Functions
-===============
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
-
-/*
-
-function add(...nums){
-    return nums.reduce( (accum, val) => accum + val );
-}
-
-*/
-
-
-//console.log(add(1, 2, 3, 4, 5));
-
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-
-An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and lexically binds the this value (does not bind its own this, arguments, super, or new.target). Arrow functions are always anonymous.
-
-**No this binding**
-
-// var Blinky = function(name, time){
-//     this.time = time;
-//     this.name = name;
-//     this.step = function(){
-//         setInterval( function() { 
-//             console.log(this.name);
-//         }, this.time);
-//     };
-// };
-
-// var blink = new Blinky("Square", 500);
-// blink.step();
-
-var blink = new Blinky("Square", 500);
-blink.step();
-
 Syntactic Sugar
 ===============
-Doing old things with less code: 
+A lot of ES2015 features are "syntactic sugar": ways to peform similar operations with cleaner code or less cumbersome syntax.  An example of syntactic sugar would be the `+` operator for concatenating strings: `"Hello, " + "world!"` is syntactic sugar for `Hello, ".concat("world!")`.
 
-Examples + operator for strings:
-        "Hello, " + "world!" is syntactic sugar for "Hello, ".concat("world!")
+Arrow Functions
+===============
+[Arrow Functions][af] are a new feature of JS that are one part syntactic sugar, one part new functionality.  As the MDN documentation says: 
+
+>An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and lexically binds the this value (does not bind its own this, arguments, super, or new.target). Arrow functions are always anonymous.
+
+As anonymous functions, they are most often useful in cases where you have a short functions.  Take a function that adds together all the values passed into it as arguments.  The ES5 way of doing this would be:
+
+**Arrow functions syntactic sugar**
+`
+function add(){
+    var nums = Array.prototype.slice.call(arguments);
+    return nums.reduce( function(accum, val) {
+        return accum + val ;
+    });
+}
+
+add(1, 2, 3, 4, 5) // output >> 15
+`
+
+Using arrow functions, we no longer need to use the `function` keyword in our callback.  We simply declare our function with the following syntax: `(params) => { //function body }`:
+
+`
+function add(){
+    var nums = Array.prototype.slice.call(arguments);
+    return nums.reduce( (accum, val) => {
+        return accum + val ;
+    });
+}
+`
+
+Furthermore, when our function body is only one-line long, we can omit the braces and the explicit return statement:
+
+`
+function add(){
+    var nums = Array.prototype.slice.call(arguments);
+    return nums.reduce( (accum, val) => accum + val );
+}
+`
+
+The final bit of syntactic sugar arrow functions provide is the ability to omit parentheses when our function only takes one argument:
+
+`
+function multiplyBy2(){
+    var nums = Array.prototype.slice.call(arguments);
+    return nums.map( num => num * 2);
+}
+
+multiplyBy2(1, 2, 3, 4, 5) // output >> [2, 4, 6, 8, 10]
+`
+
+**No dynamic this binding**
+
+The syntactic sugar arrow functions make available can provide a nice way for writing cleaner, easier-to-read callback functions.  They do have one functional difference from anonymous functions declared with the keyword `function`, however, which has to do with the binding of `this` inside of the function body.
+
+In plain old JavaScript functions, `this` gets bound at call time. If we run the following code, our step function will log "undefined" to the console every interval.
+
+`
+    var NameLogger = function(name, time){
+        this.time = time;
+        this.name = name;
+        this.step = function(){
+            setInterval( function() { 
+             console.log(this.name);
+            }, this.time);
+        };
+    };
+    var logger = new NameLogger("Ignacio", 500);
+    logger.step(); 
+    /*
+    logs =>
+    undefined
+    undefined
+    undefined...
+    */
+`
+The reason that it logs "undefined" is that our callback function (a plain old JS function) is a "free function": it is not the method of an object.  When that callback function is run, `this` is bound to the global object, rather than the object that we created with the `NameLogger` constructor, which is likely what was intended by the use of `this`.
+
+If an arrow function were substituted for our plain old JS callback function, we would get the result we want:
+
+`
+    var NameLogger = function(name, time){
+        this.time = time;
+        this.name = name;
+        this.step = () => {
+            setInterval( function() { 
+             console.log(this.name);
+            }, this.time);
+        };
+    };
+    var logger = new NameLogger("Ignacio", 500);
+    logger.step(); 
+    /*
+    logs =>
+    "Ignacio"
+    "Ignacio"
+    "Ignacio"...
+    */
+`
+
+The reason for the difference in behavior between our arrow function and the plain old JS callback function is that arrow functions create no binding to `this` at call time.  If `this` appears in an arrow function body, it will be lexically bound.  So, when the constructor function is run, it will create a `this` binding to the object being constructed.  The arrow function creates no separate `this` binding, so occurrences of `this` inside of it will be bound to the same object.
+
+Other Syntactic Sugar
+=====================
+Rest parameters
+        
 /*
 function projectNums(projector){
     var nums = Array.prototype.slice.call(arguments, 1);
@@ -258,3 +325,6 @@ Objects are not iterable!  Make no guarantee of order that you can go through.
 [ks]: [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
 [bab]:[https://babeljs.io/]
 [wp]: [https://webpack.github.io/]
+[af]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions]
+
+[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters]
