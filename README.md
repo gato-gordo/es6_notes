@@ -5,24 +5,30 @@ What is ES2015?
 "ES2015" is short for "ECMAScript 2015".  It is the current standard for the JavaScript language, which browsers must implement to be standards compliant.
 
 **What is ECMA?**
+
 ECMA stands for "European Computer Manufacturers Association".  It's the standards body that maintains what offical ECMAScript/JavaScript is, which browsers then implement so that the same JavaScript code can work in any browser environment.
 
 **'ES6' vs. 'ES2015'**
+
 New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5).   ES6 was set to be the newest relased, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016.
 
 You can Kyle Simpson's circa Feb 2015 [thoughts][ks] on the naming of the standard (this link goes to part of an entire book, available on GitHub, which he has written on the new JavaScript features).
 
 **Currently Implemented Features By Browser**
+
 https://kangax.github.io/compat-table/es6/
 
 **Short Documentation for New Features**
+
 http://es6-features.org/
 
 **Longer Documentation for New Features**
+
 For any feature of ES2015 (or really of any browser technology), Mozilla Developer Network will be your best resource for thorough documentation:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 **CodeSchool ES2015 Class (requires Subscription)**
+
 CodeSchool has a nice set of videos and challenges that work through ES2015 features:
 https://www.codeschool.com/courses/es2015-the-shape-of-javascript-to-come/
 
@@ -34,9 +40,9 @@ Because certain features of ES2015 are not universally implemented on different 
 Transpiling is a subset of compiling: transforming source code from one language to another.  Traditional compilation moves from a higher to a lower level of abstraction (e.g., compiling C source code to binary). Transpiling is compiling source code to source code at a similar level of abstraction (e.g., Sass/Less, which are CSS pre-processors, to CSS).  To get ES2015 JavaScript to run in any modern browser environment, it needs to be transpiled to ES5 JavaScript.
 
 **Transpiling ES2015 with Babel**
-The main tool for transpiling ES2015 is [Babel][bab].  For actual production projects, you will want to transpile as part of your build process through something like [Browserfy][br] or [webpack][wp].
+The main tool for transpiling ES2015 is [Babel][bab].  For actual production projects, you will want to transpile as part of a build process through something like [Browserfy][br] or [webpack][wp].  For experimentation purposes, you can manually transpile using the Babel command-line tools:
 
-***Command-Line Babel***
+***Command-Line Babel Recipe***
 NPM Module
     - You may want to have different versions running for different projects, so install locally.
 
