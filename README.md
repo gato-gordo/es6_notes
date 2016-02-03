@@ -10,9 +10,9 @@ ECMA stands for "European Computer Manufacturers Association".  It's the standar
 
 **'ES6' vs. 'ES2015'**
 
-New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5).   ES6 was set to be the newest relased, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016.
+New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5).   ES6 was set to be the newest relased, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016, etc.
 
-You can Kyle Simpson's circa Feb 2015 [thoughts][ks] on the naming of the standard (this link goes to part of an entire book, available on GitHub, which he has written on the new JavaScript features).
+You can read Kyle Simpson's circa Feb 2015 thoughts on the naming of the standard, [here][ks] (that link goes to part of an entire book, available on GitHub, which he has written on the new JavaScript features).
 
 **Currently Implemented Features By Browser**
 
@@ -25,11 +25,13 @@ http://es6-features.org/
 **Longer Documentation for New Features**
 
 For any feature of ES2015 (or really of any browser technology), Mozilla Developer Network will be your best resource for thorough documentation:
+
 https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 **CodeSchool ES2015 Class (requires Subscription)**
 
 CodeSchool has a nice set of videos and challenges that work through ES2015 features:
+
 https://www.codeschool.com/courses/es2015-the-shape-of-javascript-to-come/
 
 Transpiling ES2015 to ES5
@@ -37,9 +39,11 @@ Transpiling ES2015 to ES5
 Because certain features of ES2015 are not universally implemented on different browsers, if you want to write ES2015 code right now that can work anywhere you will need to "transpile" your ES2015 code to ES5.
 
 **What is transpiling?**
+
 Transpiling is a subset of compiling: transforming source code from one language to another.  Traditional compilation moves from a higher to a lower level of abstraction (e.g., compiling C source code to binary). Transpiling is compiling source code to source code at a similar level of abstraction (e.g., Sass/Less, which are CSS pre-processors, to CSS).  To get ES2015 JavaScript to run in any modern browser environment, it needs to be transpiled to ES5 JavaScript.
 
 **Transpiling ES2015 with Babel**
+
 The main tool for transpiling ES2015 is [Babel][bab].  For actual production projects, you will want to transpile as part of a build process through something like [Browserfy][br] or [webpack][wp].  For experimentation purposes, you can manually transpile using the Babel command-line tools:
 
 ***Command-Line Babel Recipe***
@@ -251,8 +255,6 @@ An abstraction for a collection that knows how to go through its members in orde
 
 Objects are not iterable!  Make no guarantee of order that you can go through.
 
-Links
-=====
 [ks]: [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
 [bab]:[https://babeljs.io/]
 [wp]: [https://webpack.github.io/]
