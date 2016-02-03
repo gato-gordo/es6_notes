@@ -274,12 +274,37 @@ ME = "Software Engineer";
 ME.profession = "Software Engineer";
 console.log(ME)
 ```
-really about signalling intent
 
+Iterable Objects & For-Of
+=========================
+An iterable object is an abstraction for a collection that knows how to go through its members in order.
+
+Plain old JS objects are not iterable!  They make no guarantee of how their keys will be ordered when you loop through them (might be insertion order, might be ordered through a Unicode comparison of strings, or it might be something else).
+
+JavaScript does, however, provide a bunch of specialized built-in object types (Arrays, Sets, Maps) that are iterable, and ES2015 provides a special for loop, `for-of`, that can be used to loop through iterable objects in order.  For an array, it would work as follow:
+
+```javascript
+var nums = [0, 10, 20, 30, 40, 50];
+
+for(var num of nums){
+    console.log(num);
+}
+/*
+outputs >>
+0
+10
+20
+30
+40
+50
+*/
+```
+
+So, `for-of` works by declaring a variable to the left of the `of` that will be associated with each value in the iterable object, supplied to the right of the 'of'.
 
 Set
 ===
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+[Sets][sets] are one type of iterable object.
 
 ```javascript
 var fib = new Set(arry);
@@ -328,13 +353,10 @@ for(var key in a){
 }
 ```
 
-Iterable Object
-===============
-An abstraction for a collection that knows how to go through its members in order.
 
-Plain old JS objects are not iterable!  They make no guarantee of how their keys will be ordered when you loop through them (might be insertion order, might be unicode order, might be something else).
 
 [ks]: [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
 [bab]:[https://babeljs.io/]
 [wp]: [https://webpack.github.io/]
 [af]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions]
+[sets]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set]
