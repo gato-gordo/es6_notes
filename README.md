@@ -253,6 +253,6 @@ Objects are not iterable!  Make no guarantee of order that you can go through.
 
 Links
 =====
-[ks] [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
-[bab][https://babeljs.io/]
-[wp][https://webpack.github.io/]
+[ks]: [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
+[bab]:[https://babeljs.io/]
+[wp]: [https://webpack.github.io/]
