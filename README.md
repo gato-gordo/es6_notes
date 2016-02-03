@@ -44,23 +44,24 @@ Transpiling is a subset of compiling: transforming source code from one language
 
 **Transpiling ES2015 with Babel**
 
-The main tool for transpiling ES2015 is [Babel][bab].  For actual production projects, you will want to transpile as part of a build process through something like [Browserfy][br] or [webpack][wp].  For experimentation purposes, you can manually transpile using the Babel command-line tools:
+The main tool for transpiling ES2015 is [Babel][bab].  For actual production projects, you will want to transpile as part of a build process through something like [Browserfy][br] or [webpack][wp].  [Node Catapult][nc], a JavaScript application starter kit,  For experimentation purposes, you can manually transpile using the Babel command-line tools:
 
-***Command-Line Babel Recipe***
-NPM Module
-    - You may want to have different versions running for different projects, so install locally.
+***Command-Line Babel Transpiling Recipe***
+
+Babel can be installed as an NPM Module.  Unlike many command-line tools that you will want to install globally, you may want to have different versions of Babel running for different projects, so install it locally.
 
 1. Create directory and cd in
 2. Run some commands: 
-    `
-    npm init
-    npm install --save-dev babel-cli
-    npm install --save-dev babel-preset-es2015
-    echo '{ "presets": ["es2015"] }' > .babelrc;
-    ./node_modules/.bin/babel --out-file destinationFile.js sourceFile.js
-    `
-Run the last command everytime you want to compile (you could also turn command into a build script--e.g., "npm build");
+    `npm init`
+    `npm install --save-dev babel-cli`
+    `npm install --save-dev babel-preset-es2015`
+    `echo '{ "presets": ["es2015"] }' > .babelrc`
+    `./node_modules/.bin/babel --out-file destinationFile.js sourceFile.js`
+    
+Run the last command everytime you want to transpile. You could also alias the command to an npm script--e.g., "npm build";
 
+Arrow Functions
+===============
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
 
 /*
