@@ -119,7 +119,7 @@ multiplyBy2(1, 2, 3, 4, 5) // output >> [2, 4, 6, 8, 10]
 
 The syntactic sugar arrow functions make available can provide a nice way for writing cleaner, easier-to-read callback functions.  They do have one functional difference from anonymous functions declared with the keyword `function`, however, which has to do with the binding of `this` inside of the function body.
 
-In plain old JavaScript functions, `this` gets bound at call time. If we run the following code, our step function will log "undefined" to the console every interval.
+In plain old JavaScript functions, `this` gets bound at call time. If we run the following code, our step function will log "undefined" to the console at every interval.
 
 ```javascript
     var NameLogger = function(name, time){
