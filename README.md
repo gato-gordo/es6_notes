@@ -44,7 +44,7 @@ Transpiling is a subset of compiling: transforming source code from one language
 
 **Transpiling ES2015 with Babel**
 
-The main tool for transpiling ES2015 is [Babel](https://babeljs.io/). For actual production projects, you will want to transpile as part of a build process through something like [Browserify](http://browserify.org/) or [webpack](https://webpack.github.io/).  [Node Catapult][nc], a JavaScript application starter kit,  For experimentation purposes, you can manually transpile using the Babel command-line tools:
+The main tool for transpiling ES2015 is [Babel](https://babeljs.io/). For actual production projects, you will want to transpile as part of a build process through something like [Browserify](http://browserify.org/) or [webpack](https://webpack.github.io/).  [Node Catapult](https://github.com/Concatapult/node-catapult/wiki/ES6-Babel-Support), a full-stack JS application starter kit,  includes babel transformation through Express middleware.  For experimentation purposes, you can manually transpile using the Babel command-line tools:
 
 ***Command-Line Babel Transpiling Recipe***
 
