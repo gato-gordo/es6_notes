@@ -165,7 +165,7 @@ If an arrow function were substituted for our plain old JS callback function, we
     */
 ```
 
-The reason for the difference in behavior between our arrow function and the plain old JS callback function is that arrow functions create no binding to `this` at call time.  If `this` appears in an arrow function body, it will be lexically bound.  So, when the constructor function is run, it will create a `this` binding to the object being constructed.  The arrow function creates no separate `this` binding, so occurrences of `this` inside of it will be bound to the same object.
+The reason for the difference in behavior between our arrow function and the plain old JS callback function is that arrow functions create no binding to `this` at call time.  If `this` appears in an arrow function body, it will be lexically bound.  So, when the constructor function is run, it will create a `this` binding to the object being constructed.  The arrow function creates no separate `this` binding when invoked, so occurrences of `this` inside of it will be bound to the same object.
 
 Rest Parameters
 =====================
