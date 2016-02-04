@@ -10,7 +10,7 @@ ECMA stands for "European Computer Manufacturers Association".  It's the standar
 
 **'ES6' vs. 'ES2015'**
 
-New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5).   ES6 was set to be the newest released, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016, etc.
+New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5, etc.).   ES6 was set to be the newest released, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016, etc.
 
 You can read Kyle Simpson's circa Feb 2015 thoughts on the naming of the standard, [here](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning) (that link goes to part of an entire book, available on GitHub, which he has written on the new JavaScript features).
 
@@ -115,9 +115,9 @@ function multiplyBy2(){
 multiplyBy2(1, 2, 3, 4, 5) // output >> [2, 4, 6, 8, 10]
 ```
 
-**No dynamic this binding**
+**No Dynamic this Binding**
 
-The syntactic sugar arrow functions make available can provide a nice way for writing cleaner, easier-to-read callback functions.  They do have one functional difference from anonymous functions declared with the keyword `function`, however, which has to do with the binding of `this` inside of the function body.
+Arrow functions can provide a nice way for writing cleaner, easier-to-read callback functions.  They do have one functional difference from anonymous functions declared with the keyword `function`, however, which has to do with the binding of `this` inside of the function body.
 
 In plain old JavaScript functions, `this` gets bound at call time. If we run the following code, our step function will log "undefined" to the console at every interval.
 
@@ -165,127 +165,217 @@ If an arrow function were substituted for our plain old JS callback function, we
     */
 ```
 
-The reason for the difference in behavior between our arrow function and the plain old JS callback function is that arrow functions create no binding to `this` at call time.  If `this` appears in an arrow function body, it will be lexically bound.  So, when the constructor function is run, it will create a `this` binding to the object being constructed.  The arrow function creates no separate `this` binding when invoked, so occurrences of `this` inside of it will be bound to the same object.
+The reason for the difference in behavior between our arrow function and the plain JS callback function is that arrow functions create no binding to `this` at call time.  If `this` appears in an arrow function body, it will be lexically bound.  So, when the constructor function is run, it will create a `this` binding to the object being constructed.  The arrow function creates no separate `this` binding when invoked, so occurrences of `this` inside of it will be bound to the same object.
 
 Rest Parameters
 =====================
-[Rest parameters][rp] provide more syntactic sugar.  They are way of gathering an indefinite numbers of function arguments into an array.  The  
-        
-```javascript
-function projectNums(projector){
-    var nums = Array.prototype.slice.call(arguments, 1);
-    return nums.map(projector);
-}
-function by2(num){
-    return num * 2;
+[Rest parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) provide more syntactic sugar.  They are way of collecting an indefinite numbers of function arguments in an array, using the [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator): `...`.  Consequently, they provide a cleaner syntax for "variadic functions": functions that deal with a variable number or arguments.  Take the earlier `add` example:
+
+```
+function add(){
+    var nums = Array.prototype.slice.call(arguments);
+    return nums.reduce( (accum, val) => accum + val );
 }
 ```
 
-Destructuring
-=============
+Using the spread operator and rest parameters, we no longer have to manipulate the `arguments` object, which was the ES5 way of doing things.  We can get equivalent functionality like so:
+
+```
+function add(...nums){
+    return nums.reduce( (accum, val) => accum + val );
+}
+```
+
+Any argument passed into `add` will be collected into an array callled "nums", which we can then use inside of our function.
+
+We can also use rest parameters in conjunction with named parameters that bind to indvidual arguments, though the rest parameters must always be last (otherwise, we would not know which arguments to collect into the array).  Take the following higher-order function:
+
+        
 ```javascript
-var nums = [1, 2, 3, 4, 5];
-var a = nums[0]
+function projectArgs(projector){
+    var args = Array.prototype.slice.call(arguments, 1);
+    return args.map(projector);
+}
+function multiplyBy2(num){
+    return num * 2;
+}
+projectArgs(multiplyBy2, 0, 1, 2, 3, 4, 5) // => [0, 2, 4, 6, 8, 10]
+```
+
+`projectArgs` takes one named parameter, a callback function named "projector", that will be invoked during a mapping of the rest of the arguments, which are explicitly collected into an array in the ES5 way.  With rest parameters, the same functionality can be expressed more simply:
+
+
+```javascript
+function projectArgs(projector, ...args){
+    return args.map(projector);
+}
+```
+
+Destructuring 
+=============
+[Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) is an ES2015 way of assigning to individual variables out of a structured collection (plain object or array).  The following examples show how to do equivalent assignments in ES5 and ES2015:
+
+
+```javascript
+
+/***** Array Destructuring *****/
+
+var nums = [1, 2, 3, 4, 5]; //this array never changes in these examples
+
+//ES5
+var a = nums[0];
+var b = nums[1];
+console.log(a, b); // => 1 2 
+//ES2015
+var [a, b] = nums; // assigns first two elements of nums to a & b
+console.log(a, b); // => 1 2 
+
+//ES5
+var a = nums[0];
+var b = nums[2];
+console.log(a, b); // => 1 3
+//ES2015
+var [a, , b] = nums; //assigns 0th element to a, skips 1st, assign 2nd to b
+console.log(a, b); // => 1 3
+
+//ES5
+var a = nums[0];
 var b = nums[1];
 var args = nums.slice(2);
+console.log(a, b, args); // => 1 2 [3, 4, 5]
+//ES2015 way
+var [a, b, ...args] = nums; //use spread operator to gather remaining  elements
+console.log(a, b, args); // => 1 2 [3, 4, 5]
 
-var [a, b, ...args] = nums;
-var [a, , b];
-console.log(a, b, args);
+/********************************/
 
+/***** Object Destructuring *****/
 var me = {
     name: "Ignacio",
     profession: "Fellow"
-}
-
-var name = me.name, profession = me.profession;
-
-var {name, profession} = me;
-console.log(name, profession);
-
-var name = "Ignacio", profession "Fellow";
-var me = {
-    name: name
-    profession: profession;
 };
+//ES5 
+var name = me.name, profession = me.profession;
+console.log(name, profession); // => "Ignacio" "Fellow"
 
-var me = { name, profession };
+//ES2015
+var {name, profession} = me;
+console.log(name, profession); // => "Ignacio" "Fellow"
 ```
+
+
+Shorthand Object Initialization
+==============================
+
+```javascript
+
+var name = "Ignacio", profession = "Fellow";
+
+//ES5
+var me = {
+    name: name,
+    profession: profession
+};
+console.log(me); // => { name: 'Ignacio', profession: 'Fellow' }
+//ES2015
+var me = { name, profession };
+console.log(me); // => { name: 'Ignacio', profession: 'Fellow' }
+```
+
 
 Default Parameters
 ==================
 ```javascript
-function howDeep(){
+//ES5
+function howDeep(depth){
     depth = depth || 0;
     console.log(depth);
 }
-
-howDeep(2);
-howDeep();
+howDeep(2); //=> 2
+howDeep();  //=> 0
 
 function howDeep(depth = 0){
   console.log(depth);  
 }
+howDeep(2); //=> 2
+howDeep();  //=> 0
 ```
 
-Bindings
-========
-let
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let
+New Variable Bindings
+=====================
+ES2015 introduces new variables bindings, declared with `let` and `const`, which have a scope that is different than the function scope that comes with a variable declared with `var`.
+
+**Let**
+
+[let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) provides variables with block scope:
 
 ```javascript
+//ES5
 var nums = [0, 1, 2, 3, 4, 5];
 for(var i = 0; i < nums.length; i++){
-    var name = "Just using this in my for loop";
-     console.log(nums[i])
+    var message = "Just using this in my for loop";
 }
-console.log(i)
-console.log(name);
+console.log(i);       // => 6
+console.log(message); // => "Just using this in my for loop"
+
+//ES2015
+var nums = [0, 1, 2, 3, 4, 5];
+for(let i = 0; i < nums.length; i++){
+    let message = "Just using this in my for loop";
+}
+console.log(i);       // ReferenceError: i is not defined
+console.log(message); // Execution will have stopped, but the same kind of reference error exception would be thrown without the previous links
 ```
 
-const
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
+**Const**
+
+[const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) creates a variable binding which, like `let`, is block scoped, but does not allow for re-assignment.
+
 ```javascript
-const MAX_NUM = 25;
+
+//ES5
+var MAX_NUM = 25;
 MAX_NUM = 23;
-console.log(MAX_NUM);
+console.log(MAX_NUM); // => 23
 
-var num = 25;
-const MAX = num;
-num = 23;
-console.log(MAX);
+//ES2015
+const MAX_NUM = 25;
+MAX_NUM = 23; //SyntaxError: unknown: "MAX_NUM" is read-only
+console.log(MAX_NUM);  //this line never runs
 
-scopeFun();
-function scopeFun(){
-     var MAX = 20;
-     for(let i = 0; i < 5; i++){
-         let MAX = i;
-     }
-     return MAX;
-}
+```
 
+If the value that a const variable is bound is mutable in JS(such as an object or an array), nothing about the binding prevents mutation.  Const simply prevents a variable from being re-assigned within its current scope
 
- const ME = {
-     name: "Ignacio",
-     profession: "Fellow"
- }
+```javascript
 
-ME = "Software Engineer";
+//mutating value
+const ME = {
+    name: "Ignacio",
+    profession: "Fellow"
+};
 ME.profession = "Software Engineer";
-console.log(ME)
+console.log(ME); // { name: 'Ignacio', profession: 'Software Engineer' }
+
+//re-assigning
+const ME = {
+    name: "Ignacio",
+    profession: "Fellow"
+}
+ME = "Software Engineer"; // SyntaxError: unknown: "ME" is read-only
+console.log(ME); // this line never runs
 ```
 
 Iterable Objects & For-Of
 =========================
-An iterable object is an abstraction for a collection that knows how to go through its members in order.
+An iterable object is an abstraction for a collection that knows how to go through its members in an order.
 
-Plain old JS objects are not iterable!  They make no guarantee of how their keys will be ordered when you loop through them (might be insertion order, might be ordered through a Unicode comparison of strings, or it might be something else).
+Plain old JS objects are not iterable!  They make no guarantee of how their keys will be ordered when you loop through them with a for-of (might be insertion order, might be ordered through a Unicode comparison of key strings, or it might be something else).
 
 JavaScript does, however, provide a bunch of specialized built-in object types (Arrays, Sets, Maps) that are iterable, and ES2015 provides a special for loop, `for-of`, that can be used to loop through iterable objects in order.  For an array, it would work as follow:
 
 ```javascript
 var nums = [0, 10, 20, 30, 40, 50];
-
 for(var num of nums){
     console.log(num);
 }
@@ -300,11 +390,11 @@ outputs >>
 */
 ```
 
-So, `for-of` works by declaring a variable to the left of the `of` that will be associated with each value in the iterable object, supplied to the right of the `of`.
+`for-of` works by declaring a variable to the left of the `of` that will be associated with each value in the iterable object, supplied to the right of the `of`.
 
 Set
 ===
-[Sets][sets] are one relatively simple type of iterable object.  They are basically a collection values of that enforces uniqueness for its members (the same value cannot be stored in the collection twice).
+[Sets][sets] are one relatively simple type of iterable object.  They are basically a collection of values that enforces uniqueness for its members (the same value cannot be stored in the collection twice).
 
 ```javascript
 var fib = new Set(arry);
@@ -382,14 +472,9 @@ var iterable = {
     d: 4,
     e: 5,
     Symbol.iterator: function(){ 
-        //returns an iterator that knows how to through iterable in order 
+        //returns an iterator that knows how to through iterable object in order 
     }
 }
 ```
 
-The iterator that's returned from iterable[Symbol.iterator] has a next method that returns 
-
-
-[map]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map]
-[rp]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters]
-[br]: [http://browserify.org/]
+The iterator that's returned from iterable[Symbol.iterator] has a next method that returns
