@@ -149,7 +149,7 @@ If an arrow function were substituted for our plain old JS callback function, we
     var NameLogger = function(name, time){
         this.time = time;
         this.name = name;
-        this.step = function {
+        this.step = function() {
             setInterval( () => { 
              console.log(this.name);
             }, this.time);
