@@ -393,7 +393,4 @@ The iterator that's returned from iterable[Symbol.iterator] has a next method th
 [bab]:[https://babeljs.io/]
 [wp]: [https://webpack.github.io/]
 [af]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions]
-[sets]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set]
-[map]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map]
-[rp]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters]
-[br]: [http://browserify.org/]
+
