@@ -167,9 +167,9 @@ If an arrow function were substituted for our plain old JS callback function, we
 
 The reason for the difference in behavior between our arrow function and the plain old JS callback function is that arrow functions create no binding to `this` at call time.  If `this` appears in an arrow function body, it will be lexically bound.  So, when the constructor function is run, it will create a `this` binding to the object being constructed.  The arrow function creates no separate `this` binding, so occurrences of `this` inside of it will be bound to the same object.
 
-Other Syntactic Sugar
+Rest Parameters
 =====================
-Rest parameters
+[Rest parameters][rp] provide more syntactic sugar.  They are way of gathering an indefinite numbers of function arguments into an array.  The  
         
 ```javascript
 function projectNums(projector){
@@ -395,3 +395,5 @@ The iterator that's returned from iterable[Symbol.iterator] has a next method th
 [af]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions]
 [sets]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set]
 [map]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map]
+[rp]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters]
+[br]: [http://browserify.org/]
