@@ -65,7 +65,7 @@ A lot of ES2015 features are "syntactic sugar": ways to peform similar operation
 
 Arrow Functions
 ===============
-[Arrow Functions][af] are a new feature of JS that are one part syntactic sugar, one part new functionality.  As the MDN documentation says: 
+[Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) are a new feature of JS that are one part syntactic sugar, one part new functionality.  As the MDN documentation says: 
 
 >An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and lexically binds the this value (does not bind its own this, arguments, super, or new.target). Arrow functions are always anonymous.
 
