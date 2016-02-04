@@ -12,7 +12,7 @@ ECMA stands for "European Computer Manufacturers Association".  It's the standar
 
 New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5).   ES6 was set to be the newest released, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016, etc.
 
-You can read Kyle Simpson's circa Feb 2015 thoughts on the naming of the standard, [here][ks] (that link goes to part of an entire book, available on GitHub, which he has written on the new JavaScript features).
+You can read Kyle Simpson's circa Feb 2015 thoughts on the naming of the standard, [here](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning) (that link goes to part of an entire book, available on GitHub, which he has written on the new JavaScript features).
 
 **Currently Implemented Features By Browser**
 
@@ -44,7 +44,7 @@ Transpiling is a subset of compiling: transforming source code from one language
 
 **Transpiling ES2015 with Babel**
 
-The main tool for transpiling ES2015 is [Babel][bab].  For actual production projects, you will want to transpile as part of a build process through something like [Browserfy][br] or [webpack][wp].  [Node Catapult][nc], a JavaScript application starter kit,  For experimentation purposes, you can manually transpile using the Babel command-line tools:
+The main tool for transpiling ES2015 is [Babel](https://babeljs.io/). For actual production projects, you will want to transpile as part of a build process through something like [Browserify](http://browserify.org/) or [webpack](https://webpack.github.io/).  [Node Catapult][nc], a JavaScript application starter kit,  For experimentation purposes, you can manually transpile using the Babel command-line tools:
 
 ***Command-Line Babel Transpiling Recipe***
 
@@ -389,8 +389,7 @@ var iterable = {
 
 The iterator that's returned from iterable[Symbol.iterator] has a next method that returns 
 
-[ks]: [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
-[bab]:[https://babeljs.io/]
-[wp]: [https://webpack.github.io/]
-[af]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions]
 
+[map]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map]
+[rp]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters]
+[br]: [http://browserify.org/]
