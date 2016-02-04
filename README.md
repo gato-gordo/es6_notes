@@ -10,7 +10,7 @@ ECMA stands for "European Computer Manufacturers Association".  It's the standar
 
 **'ES6' vs. 'ES2015'**
 
-New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5).   ES6 was set to be the newest relased, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016, etc.
+New standards of ECMAScript had in the past been rolled out with release numbers (ES3, ES5).   ES6 was set to be the newest released, but the standards body has decided to aim at a new official standard every year.  So now we'll have ES2015, ES2016, etc.
 
 You can read Kyle Simpson's circa Feb 2015 thoughts on the naming of the standard, [here][ks] (that link goes to part of an entire book, available on GitHub, which he has written on the new JavaScript features).
 
@@ -149,8 +149,8 @@ If an arrow function were substituted for our plain old JS callback function, we
     var NameLogger = function(name, time){
         this.time = time;
         this.name = name;
-        this.step = () => {
-            setInterval( function() { 
+        this.step = function {
+            setInterval( () => { 
              console.log(this.name);
             }, this.time);
         };
@@ -226,7 +226,7 @@ howDeep();
 function howDeep(depth = 0){
   console.log(depth);  
 }
-```javascript
+```
 
 Bindings
 ========
@@ -300,11 +300,11 @@ outputs >>
 */
 ```
 
-So, `for-of` works by declaring a variable to the left of the `of` that will be associated with each value in the iterable object, supplied to the right of the 'of'.
+So, `for-of` works by declaring a variable to the left of the `of` that will be associated with each value in the iterable object, supplied to the right of the `of`.
 
 Set
 ===
-[Sets][sets] are one type of iterable object.
+[Sets][sets] are one relatively simple type of iterable object.  They are basically a collection values of that enforces uniqueness for its members (the same value cannot be stored in the collection twice).
 
 ```javascript
 var fib = new Set(arry);
@@ -328,8 +328,10 @@ var arry = [0, 1, 1, 2, 3, 5, 8, 13];
 
 Map
 ===
-Key/value store: key can be any value, instead of just a string
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+[Maps][map] are type of key/value store.  Unlike plain old JS objects, they are iterable (a Map will iterate through its members in insertion order).  The other distinguishing feature of Maps is that any kind of value can be a key (rather than simply string values, which are the only kind of key in plain old JS objects).
+
+This can illustrated through a slightly artificial example:
+
 
 ```javascript
 var a = {}
@@ -347,16 +349,49 @@ a[c] = "christine";
 
 console.log(a[b], a[c])
 
-//Whaa?
+/*
+outputs >>
+"christine, "christine"
+Whaa?  Let's see: */
+
 for(var key in a){
     console.log(key);
 }
+/*
+
+outputs >>
+[object Object]
+*/
 ```
 
 
+Iterable Objects & Iterators
+=============================
+
+Iterable objects have been described at a high-level as collections that know how go through their values in order.  Under the hood, iterable objects are objects that know how to return a special object called an "Iterator".
+
+An iterator is an object knows how to access members of a collection while keeping track of its current position.
+
+Iterators are returned from the function stored at the Symbol.iterator key of an object.  Symbols are a new type of value in ES2105.  Explaining them is it's own rabbit hole.  For now, know that an iterable object returns an object that knows called iterator at the Symbol.iterator key:
+
+```javascript
+var iterable = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+    e: 5,
+    Symbol.iterator: function(){ 
+        //returns an iterator that knows how to through iterable in order 
+    }
+}
+```
+
+The iterator that's returned from iterable[Symbol.iterator] has a next method that returns 
 
 [ks]: [https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch1.md#versioning]
 [bab]:[https://babeljs.io/]
 [wp]: [https://webpack.github.io/]
 [af]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions]
 [sets]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set]
+[map]: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map]
