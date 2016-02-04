@@ -69,7 +69,7 @@ Arrow Functions
 
 >An arrow function expression (also known as fat arrow function) has a shorter syntax compared to function expressions and lexically binds the this value (does not bind its own this, arguments, super, or new.target). Arrow functions are always anonymous.
 
-**Arrow functions syntactic sugar**
+**Arrow functions as syntactic sugar**
 
 As anonymous functions, arrow functions are most often useful in cases where you are declaring short callback functions.  Take a function that adds together all the values passed into it as arguments.  The ES5 way of doing this would be:
 
