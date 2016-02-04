@@ -61,7 +61,7 @@ Run the last command everytime you want to transpile. You could also alias the c
 
 Syntactic Sugar
 ===============
-A lot of ES2015 features are "syntactic sugar": ways to peform similar operations with cleaner code or less cumbersome syntax.  An example of syntactic sugar would be the `+` operator for concatenating strings: `"Hello, " + "world!"` is syntactic sugar for `Hello, ".concat("world!")`.
+A lot of ES2015 features are "syntactic sugar": ways to peform similar operations with cleaner code or less cumbersome syntax.  An example of syntactic sugar would be the `+` operator for concatenating strings: `"Hello, " + "world!"` is syntactic sugar for `"Hello, ".concat("world!")`.
 
 Arrow Functions
 ===============
